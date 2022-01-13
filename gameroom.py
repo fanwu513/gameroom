@@ -144,7 +144,6 @@ def black_jack():
         your_score = 0
         dealt_card = random.choice(list(cards_list))
         YOUR_HAND = YOUR_CARDS.append(dealt_card)
-        COMPUTER_HAND = COMPUTER_CARDS.append(dealt_card)
         print("Your hand: ", YOUR_CARDS)
         for card in range(0, len(YOUR_CARDS)):
             your_score = your_score + YOUR_CARDS[card]
@@ -173,10 +172,13 @@ def black_jack():
             computer_score = computer_score + COMPUTER_CARDS[card]
             print("The House score is now: ", computer_score)
             x = x + 1
-        if computer_score > 22:
+        if computer_score >= 22:
             print("The House busted, you win")
-        if computer_score < 14:
+        if computer_score <= 15:
             computer_turn()
+        else:
+            winner()
+            main()
 
 
     def answer():
@@ -187,9 +189,8 @@ def black_jack():
             print("Computer's turn")
             computer_turn()
 
-    def blackjack():
-        game_intro()
-        play_game()
+
+    def winner():
         if your_score < computer_score <= 21:
             print("The House had: ", computer_score, " points")
             print("You had: ", your_score, "points")
@@ -198,7 +199,14 @@ def black_jack():
             print("The House had: ", computer_score, " points")
             print("You had: ", your_score, "points")
             print("You won")
+
+
+    def blackjack():
+        game_intro()
+        play_game()
+        winner()
         main()
+
 
     blackjack()
 
