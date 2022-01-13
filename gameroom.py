@@ -140,16 +140,17 @@ def black_jack():
 
     def hit():
         x = 1
-        score = 0
+        global your_score
+        your_score = 0
         dealt_card = random.choice(list(cards_list))
         YOUR_HAND = YOUR_CARDS.append(dealt_card)
         COMPUTER_HAND = COMPUTER_CARDS.append(dealt_card)
         print("Your hand: ", YOUR_CARDS)
         for card in range(0, len(YOUR_CARDS)):
-            score = score + YOUR_CARDS[card]
-            print("Your score is now: ", score)
+            your_score = your_score + YOUR_CARDS[card]
+            print("Your score is now: ", your_score)
             x = x + 1
-            if score > 21:
+            if your_score > 21:
                 print("You busted")
                 main()
         answer()
@@ -160,20 +161,23 @@ def black_jack():
     def hit_continue():
         hit()
 
+
     def computer_turn():
         x = 1
-        score = 0
+        global computer_score
+        computer_score = 0
         dealt_card = random.choice(list(cards_list))
         COMPUTER_HAND = COMPUTER_CARDS.append(dealt_card)
         print("The house is hand: ", COMPUTER_CARDS)
         for card in range(0, len(COMPUTER_CARDS)):
-            score = score + COMPUTER_CARDS[card]
-            print("The House score is now: ", score)
+            computer_score = computer_score + COMPUTER_CARDS[card]
+            print("The House score is now: ", computer_score)
             x = x + 1
-            if score > 22:
-                print("The House busted, you win")
-                main()
-        computer_turn()
+        if computer_score > 22:
+            print("The House busted, you win")
+        if computer_score < 14:
+            computer_turn()
+
 
     def answer():
         answer = input("Would you like to hit or stay?\n").strip().lower()
@@ -186,7 +190,15 @@ def black_jack():
     def blackjack():
         game_intro()
         play_game()
-        computer_turn()
+        if your_score < computer_score <= 21:
+            print("The House had: ", computer_score, " points")
+            print("You had: ", your_score, "points")
+            print("The House won, you lost")
+        else:
+            print("The House had: ", computer_score, " points")
+            print("You had: ", your_score, "points")
+            print("You won")
+        main()
 
     blackjack()
 
