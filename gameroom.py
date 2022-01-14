@@ -42,11 +42,14 @@ def rock_paper_scissor():
         print("Welcome to Rock, Paper, Scissor. Press 'q' to quit")
 
     def play_game():
+
+        #starts the game by asking you to choose rock, paper, or scissor, or q to quit 
         your_choice = input("Choose rock, paper, or scissor \n").strip().lower()
 
         if your_choice == "q":
             quit()
 
+        #computer randomly chooses 
         computer_choice = ROCK_PAPER_SCISSOR[int(random.randrange(0, 2))]
 
         your_pick_sentence = "You chose " + your_choice
@@ -138,6 +141,8 @@ def black_jack():
     def game_intro():
         print("Welcome to Blackjack")
 
+    # calculates your hand based on your cards
+    # if you get 22 or more, you automatically lose
     def hit():
         x = 1
         global your_score
@@ -162,6 +167,9 @@ def black_jack():
 
 
     def computer_turn():
+        
+        #calulates computer's score
+        #computer must hit if 15 or more
         x = 1
         global computer_score
         computer_score = 0
